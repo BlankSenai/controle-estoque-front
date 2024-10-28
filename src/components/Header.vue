@@ -1,8 +1,9 @@
 <script setup>
-import { defineProps, ref } from 'vue'
+import { defineProps, ref, defineEmits } from 'vue'
 import { Icon } from '@iconify/vue'
 
 const props = defineProps(['title', 'btnText'])
+const emit = defineEmits(['modal'])
 
 </script>
 
@@ -11,7 +12,7 @@ const props = defineProps(['title', 'btnText'])
         <div class="container">
             <h1>{{ props.title }}</h1>
 
-            <button>{{ props.btnText }}<Icon icon="material-symbols:add-2" width="30px"/></button>
+            <button @click="emit('modal', true)" >{{ props.btnText }}<Icon icon="material-symbols:add-2" width="30px"/></button>
         </div>
     </div>
 </template>
