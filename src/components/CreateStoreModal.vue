@@ -1,5 +1,32 @@
 <script setup>
-const emit = defineEmits(['modal'])
+import { defineEmits, ref } from 'vue'
+import axios from 'axios'
+
+const emit = defineEmits(['modal', 'submitData'])
+
+const name = ref('')
+const address = ref('')
+const inputColor = ref('solid 1px black')
+
+function validateInputs() {
+    if (name.value === '' || address.value === '') {
+        inputColor.value = 'solid 1px red'
+    } else {
+        inputColor.value = 'solid 1px black'
+
+        const store = {
+            nome: name.value,
+            endereco: address.value
+        }
+
+        axios('http://localhost:3000/mercados', {
+            method: 'POST',
+            data: store
+        })
+
+        emit('modal', false)
+    }
+}
 </script>
 
 <template>
@@ -13,13 +40,13 @@ const emit = defineEmits(['modal'])
 
         <div class="input-container">
             <label>Nome</label>
-            <input type="text">
+            <input v-model="name" :style="{border: inputColor}" type="text">
 
             <label>Endereço</label>
-            <input type="text">
+            <input v-model="address" :style="{border: inputColor}" type="text">
         </div>
 
-        <button class="btn">Criar Loja</button>
+        <button @click="validateInputs" class="btn">Criar Loja</button>
     </div>
 </template>
 
