@@ -58,7 +58,7 @@ function validateInputs() {
             <input v-model="quantity" :style="{border: inputColor}" type="number">
         </div>
 
-        <button @click="validateInputs" class="btn">Criar Movimento</button>
+        <button @click="validateInputs" class="btn">Criar Produto</button>
     </div>
 </template>
 
