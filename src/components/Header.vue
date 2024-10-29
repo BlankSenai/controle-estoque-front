@@ -51,6 +51,7 @@ button {
     justify-content: space-around;
     transition: 0.2s;
     filter: drop-shadow(0px 0px 5px #000);
+    cursor: pointer;
 }
 
 button:hover {
