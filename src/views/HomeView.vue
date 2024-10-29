@@ -27,7 +27,52 @@ const stores = ref([
         id: 3,
         nome: 'teste3',
         endereco: 'teste33'
-    }
+    },
+    {
+        id: 3,
+        nome: 'teste3',
+        endereco: 'teste33'
+    },
+    {
+        id: 3,
+        nome: 'teste3',
+        endereco: 'teste33'
+    },
+    {
+        id: 3,
+        nome: 'teste3',
+        endereco: 'teste33'
+    },
+    {
+        id: 3,
+        nome: 'teste3',
+        endereco: 'teste33'
+    },
+    {
+        id: 3,
+        nome: 'teste3',
+        endereco: 'teste33'
+    },
+    {
+        id: 3,
+        nome: 'teste3',
+        endereco: 'teste33'
+    },
+    {
+        id: 3,
+        nome: 'teste3',
+        endereco: 'teste33'
+    },
+    {
+        id: 3,
+        nome: 'teste3',
+        endereco: 'teste33'
+    },
+    {
+        id: 3,
+        nome: 'teste3',
+        endereco: 'teste33'
+    },
 ])
 const showModal = ref(false)
 
@@ -48,5 +93,11 @@ function openModal(value) {
 </template>
 
 <style scoped>
-
+.stores-container {
+    width: 60%;
+    margin: 50px auto ;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 </style>
