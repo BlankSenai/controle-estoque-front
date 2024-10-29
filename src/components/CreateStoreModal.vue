@@ -109,6 +109,7 @@ button {
     border-radius: 20px;
     background-color: #ccc;
     transition: 0.2s;
+    cursor: pointer;
 }
 
 button:hover {
