@@ -12,7 +12,7 @@ const emit = defineEmits(['modal'])
         <div class="container">
             <h1>{{ props.title }}</h1>
 
-            <button @click="emit('modal', true)" >{{ props.btnText }}<Icon icon="material-symbols:add-2" width="30px"/></button>
+            <button v-if="props.btnText != ''" @click="emit('modal', true)" >{{ props.btnText }}<Icon icon="material-symbols:add-2" width="30px"/></button>
         </div>
     </div>
 </template>
