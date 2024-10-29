@@ -22,7 +22,7 @@
 </script>
 
 <template>
-  <HeaderComponent title="PRODUTOS" btnText="Adicionar Produto"/>
+  <HeaderComponent title="NOMEDALOJA" btnText=""/>
 </template>
 
 <style scoped>
