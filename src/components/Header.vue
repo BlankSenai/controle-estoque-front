@@ -1,6 +1,7 @@
 <script setup>
-import { defineProps, ref, defineEmits } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 import { Icon } from '@iconify/vue'
+import router from '@/router'
 
 const props = defineProps(['title', 'btnText'])
 const emit = defineEmits(['modal'])
@@ -9,7 +10,10 @@ const emit = defineEmits(['modal'])
 
 <template>
     <div class="header">
+        
         <div class="container">
+            <Icon v-if="title != 'LOJAS'" @click="router.go(-1)" icon="ooui:arrow-previous-ltr" width="50px" color="#fff" class="icon"/>
+            
             <h1>{{ props.title }}</h1>
 
             <button v-if="props.btnText != ''" @click="emit('modal', true)" >{{ props.btnText }}<Icon icon="material-symbols:add-2" width="30px"/></button>
@@ -23,6 +27,21 @@ const emit = defineEmits(['modal'])
     width: 100%;
     height: 150px;
     filter: drop-shadow(0px 0px 5px #333);
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.icon:hover {
+    transform: scale(1.1);
+}
+
+.icon:active {
+    transform: scale(0.9);
 }
 
 .container {
