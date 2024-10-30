@@ -4,6 +4,9 @@ import CreateStoreModal from '../components/CreateStoreModal.vue'
 import Store from '@/components/Store.vue'
 import { onMounted, ref } from 'vue';
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 onMounted(() => {
     // const result = axios('http://localhost:3000/mercados', {
@@ -88,7 +91,7 @@ function openModal(value) {
     <HeaderComponent title="LOJAS" btnText="Adicionar lojas" @modal="openModal"/>
 
     <div class="stores-container">
-        <Store v-for="s in stores" :key="s.id" :store="s"/>
+        <Store v-for="s in stores" :key="s.id" :store="s" @click="router.push(`loja/${s.id}`)"/>
     </div>
 </template>
 
