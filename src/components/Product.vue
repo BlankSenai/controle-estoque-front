@@ -7,16 +7,30 @@ const props = defineProps(['product'])
 <template>
     <div class="product">
         <h1>{{ props.product.nome }}</h1>
-        <p>{{ props.product.descricao }}</p>
-        <p>{{ props.product.preco }}</p>
-        <p>{{ props.product.quantidade }}</p>
     </div>
 </template>
 
 <style scoped>
 .product {
-    background-color: aqua;
+    background-color: #ccc;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 20px;
     width: 100%;
-    height: 100px;
+    transition: 0.2s;
+    filter: drop-shadow(0px 0px 5px #ccc);
+    cursor: pointer;
+}
+
+p {
+    font-size: 20px;
+}
+
+.product:hover {
+    transform: scale(1.02);
+}
+
+.product:active {
+    transform: scale(0.98);
 }
 </style>
