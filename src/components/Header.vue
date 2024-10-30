@@ -12,11 +12,13 @@ const emit = defineEmits(['modal'])
     <div class="header">
         
         <div class="container">
-            <Icon v-if="title != 'LOJAS'" @click="router.go(-1)" icon="ooui:arrow-previous-ltr" width="50px" color="#fff" class="icon"/>
+            <Icon v-if="title != 'LOJAS'" @click="router.go(-1)" icon="ooui:arrow-previous-ltr" width="40px" color="#fff" class="icon"/>
             
-            <h1>{{ props.title }}</h1>
-
-            <button v-if="props.btnText != ''" @click="emit('modal', true)" >{{ props.btnText }}<Icon icon="material-symbols:add-2" width="30px"/></button>
+            <div class="spacer">
+                <h1>{{ props.title }}</h1>
+    
+                <button v-if="props.btnText != ''" @click="emit('modal', true)" >{{ props.btnText }}<Icon icon="material-symbols:add-2" width="30px"/></button>
+            </div>
         </div>
     </div>
 </template>
@@ -34,6 +36,7 @@ const emit = defineEmits(['modal'])
 .icon {
     cursor: pointer;
     transition: 0.2s;
+    margin-right: 40px;
 }
 
 .icon:hover {
@@ -45,12 +48,18 @@ const emit = defineEmits(['modal'])
 }
 
 .container {
-    width: 800px;
+    width: 900px;
     margin: 0 auto;
     height: 100%;
     display: flex;
     align-items: center;
+}
+
+.spacer {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 h1 {
