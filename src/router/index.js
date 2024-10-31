@@ -28,7 +28,7 @@ const router = createRouter({
       component: ProductView
     },
     {
-      path: '/movimentos/:id',
+      path: '/:produto/movimentacoes',
       name: 'movimentos',
       component: MovesView
     },
