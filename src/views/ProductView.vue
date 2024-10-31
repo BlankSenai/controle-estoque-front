@@ -1,9 +1,9 @@
 <script setup>
-  import { Icon } from '@iconify/vue';
+import { Icon } from '@iconify/vue';
 import HeaderComponent from '../components/Header.vue'
-  import axios from 'axios'
+import axios from 'axios'
 import { useRoute } from 'vue-router'
-import { useRouter }  from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const route = useRoute()
@@ -21,28 +21,31 @@ function editProduct() {
 </script>
 
 <template>
-  <HeaderComponent :title="product.nome" btnText=""/>
+  <HeaderComponent :title="product.nome" btnText="" />
 
   <div class="product-info-container">
     <div class="top-container">
-      <div class="image"> <Icon icon="material-symbols:imagesmode-rounded" color="#555" width="50px"/> </div>
-      
+      <div class="image">
+        <Icon icon="material-symbols:imagesmode-rounded" color="#555" width="50px" />
+      </div>
+
       <div class="info-container">
         <div clas="infos">
           <h1 class="price">R${{ product.preco }}</h1>
-      
+
           <p class="description">{{ product.descricao }}</p>
         </div>
-    
+
         <div class="quantity-container">
           <p class="quantity">{{ product.quantidade }}<span> em estoque</span></p>
         </div>
 
-        <Icon icon="material-symbols:edit" width="30px" color="#333" class="edit-btn" @click="editProduct"/>
+        <Icon icon="material-symbols:edit" width="30px" color="#333" class="edit-btn" @click="editProduct" />
       </div>
     </div>
-      
-    <button @click="router.push(`/${route.params.id}/movimentacoes`)" class="moves-btn">Ver movimentações do produto</button>
+
+    <button @click="router.push(`/${route.params.id}/movimentacoes`)" class="moves-btn">Ver movimentações do
+      produto</button>
   </div>
 </template>
 
