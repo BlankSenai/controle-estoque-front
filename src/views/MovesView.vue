@@ -14,7 +14,7 @@
 <template>
   <CreateMovesModal v-if="showModal" @modal="openModal"/>
 
-  <HeaderComponent title="MOVIMENTAÇÔES" btnText="Adicionar movimento" @modal="openModal"/>
+  <HeaderComponent title="MOVIMENTAÇÕES" btnText="Adicionar movimento" @modal="openModal"/>
 </template>
 
 <style scoped>
