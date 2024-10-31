@@ -2,11 +2,12 @@
   import HeaderComponent from '../components/Header.vue'
   import CreateProductModal from '../components/CreateProductModal.vue'
   import { ref } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
   import axios from 'axios'
   import Product from '@/components/Product.vue'
 
   const route = useRoute()
+  const router = useRouter()
 
   const storeId = route.params.id
 
@@ -65,7 +66,7 @@
   <HeaderComponent title="SJIBSDVU" btnText="Novo Produto" @modal="openModal"/>
 
   <div class="products-container">
-    <Product v-for="p in produtos" :key="p.id" :product="p"/>
+    <Product @click="router.push(`/produto/${p.id}`)" v-for="p in produtos" :key="p.id" :product="p"/>
   </div>
 </template>
 
