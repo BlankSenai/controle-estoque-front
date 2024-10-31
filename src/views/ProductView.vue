@@ -15,6 +15,9 @@ const product = {
   quantidade: '84'
 }
 
+function editProduct() {
+
+}
 </script>
 
 <template>
@@ -34,6 +37,8 @@ const product = {
         <div class="quantity-container">
           <p class="quantity">{{ product.quantidade }}<span> em estoque</span></p>
         </div>
+
+        <Icon icon="material-symbols:edit" width="30px" color="#333" class="edit-btn" @click="editProduct"/>
       </div>
     </div>
       
@@ -108,5 +113,18 @@ button:hover {
 
 button:active {
   transform: scale(0.98);
+}
+
+.edit-btn {
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  transform: scale(1.1);
+}
+
+.edit-btn:active {
+  transform: scale(0.9);
 }
 </style>

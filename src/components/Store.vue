@@ -1,13 +1,29 @@
 <script setup>
+import { Icon } from '@iconify/vue';
 import { defineProps } from 'vue'
 
 const props = defineProps(['store'])
+
+function deleteStore() {
+
+}
+
+function editStore() {
+
+}
 </script>
 
 <template>
     <div class="store">
-        <h1>{{ store.nome }}</h1>
-        <h2>{{ store.endereco }}</h2>
+        <div class="text">
+            <h1>{{ store.nome }}</h1>
+            <h2>{{ store.endereco }}</h2>
+        </div>
+
+        <div class="btn-container">
+            <Icon icon="material-symbols:delete" color="#333" width="30px" class="delete-btn" @click.stop="deleteStore"/>
+            <Icon icon="material-symbols:edit" color="#333" width="30px" class="delete-btn" @click.stop="editStore"/>
+        </div>
     </div>
 </template>
 
@@ -25,24 +41,35 @@ const props = defineProps(['store'])
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    cursor: pointer;
+    overflow: auto;
 }
 
 h1 {
     font-size: 50px;
     font-weight: bold;
+    word-break: break-all;
 }
 
 h2 {
     font-size: 25px;
     font-weight: normal;
+    word-break: break-all;
 }
 
 .store:hover {
     transform: scale(1.05);
 }
 
-.store:active {
-    transform: scale(0.95);
+.delete-btn {
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    transform: scale(1.1);
+}
+
+.delete-btn:active {
+    transform: scale(0.9);
 }
 </style>
