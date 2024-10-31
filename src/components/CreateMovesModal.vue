@@ -42,7 +42,11 @@ function validateInputs() {
 
         <div class="input-container">
             <label>Tipo</label>
-            <input v-model="type" :style="{border: inputColor}" type="text">
+            <select v-model="type" :style="{border: inputColor}">
+                <option value="" selected disabled hidden></option>
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+            </select>
 
             <label>Quantidade</label>
             <input v-model="quantity" :style="{border: inputColor}" type="number">
@@ -94,7 +98,7 @@ h1 {
     font-size: 60px;
 }
 
-input {
+input, select {
     font-size: 26px;
     padding: 5px;
     border-radius: 10px;
