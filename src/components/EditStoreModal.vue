@@ -47,7 +47,7 @@ async function validateInputs() {
 			<input v-model="address" :style="{ border: inputColor }" type="text">
 		</div>
 
-		<button @click="validateInputs" class="btn">Criar Loja</button>
+		<button @click="validateInputs" class="btn">Editar Loja</button>
 	</div>
 </template>
 

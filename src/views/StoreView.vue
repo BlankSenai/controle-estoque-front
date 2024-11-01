@@ -27,15 +27,20 @@ async function getProducts() {
   }
 }
 
-function openModal(value) {
-  showModal.value = value
+function closeModal() {
+  showModal.value = false
+
+}
+
+function openModal() {
+  showModal.value = true
 }
 </script>
 
 <template>
-  <CreateProductModal v-if="showModal" @modal="openModal" :storeId="route.params.id"/>
+  <CreateProductModal v-if="showModal" @closeModal="closeModal" :storeId="route.params.id"/>
 
-  <HeaderComponent title="SJIBSDVU" btnText="Novo Produto" @modal="openModal" />
+  <HeaderComponent title="SJIBSDVU" btnText="Novo Produto" @openModal="openModal" />
 
   <div class="products-container">
     <Product @click="router.push(`/${route.params.id}/produto/${p.ID}`)" v-for="p in products" :key="p.ID" :product="p" :storeId="route.params.id"/>
