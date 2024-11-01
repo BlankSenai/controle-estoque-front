@@ -8,7 +8,7 @@ const name = ref('')
 const address = ref('')
 const inputColor = ref('solid 1px black')
 
-function validateInputs() {
+async function validateInputs() {
 	if (name.value === '' || address.value === '') {
 		inputColor.value = 'solid 1px red'
 	} else {
@@ -19,7 +19,8 @@ function validateInputs() {
 			endereco: address.value
 		}
 
-		axios('http://localhost:3000/mercados', {
+		await axios({
+			url: 'http://localhost:3000/mercados',
 			method: 'POST',
 			data: store
 		})

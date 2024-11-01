@@ -4,15 +4,24 @@ import HeaderComponent from '../components/Header.vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue';
 
 const router = useRouter()
 const route = useRoute()
 
-const product = {
-  nome: 'Teste produto aa',
-  descricao: 'um produto qualquer ai aaaaaaaaaaaaaaaa',
-  preco: '123123',
-  quantidade: '84'
+const product = ref({})
+
+onMounted(getProduct)
+
+async function getProduct() {
+  const response = await axios({
+    method: 'get',
+    url: `http://localhost:3000/mercados/${route.params.loja}/produtos/${route.params.id}`
+  }).catch(error => console.log(error))
+
+  if (response) {
+    product.value = response.data[0]
+  }
 }
 
 function editProduct() {
@@ -21,7 +30,7 @@ function editProduct() {
 </script>
 
 <template>
-  <HeaderComponent :title="product.nome" btnText="" />
+  <HeaderComponent :title="product.NOME" btnText="" />
 
   <div class="product-info-container">
     <div class="top-container">
@@ -31,20 +40,20 @@ function editProduct() {
 
       <div class="info-container">
         <div clas="infos">
-          <h1 class="price">R${{ product.preco }}</h1>
+          <h1 class="price">R${{ product.PRECO }}</h1>
 
-          <p class="description">{{ product.descricao }}</p>
+          <p class="description">{{ product.DESCRICAO }}</p>
         </div>
 
         <div class="quantity-container">
-          <p class="quantity">{{ product.quantidade }}<span> em estoque</span></p>
+          <p class="quantity">{{ product.QUANTIDADE }}<span> em estoque</span></p>
         </div>
 
         <Icon icon="material-symbols:edit" width="30px" color="#333" class="edit-btn" @click="editProduct" />
       </div>
     </div>
 
-    <button @click="router.push(`/${route.params.id}/movimentacoes`)" class="moves-btn">Ver movimentações do
+    <button @click="router.push(`/${route.params.loja}/${route.params.id}/movimentacoes`)" class="moves-btn">Ver movimentações do
       produto</button>
   </div>
 </template>

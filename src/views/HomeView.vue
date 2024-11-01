@@ -2,54 +2,49 @@
 import HeaderComponent from '../components/Header.vue'
 import CreateStoreModal from '../components/CreateStoreModal.vue'
 import Store from '@/components/Store.vue'
-import { onMounted, ref } from 'vue';
+import { onMounted, onUpdated, ref } from 'vue';
 import axios from 'axios'
+import EditStoreModal from '@/components/EditStoreModal.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-onMounted(() => {
+const stores = ref([])
 
-})
+onMounted(getStores)
+onUpdated(getStores)
 
-const stores = ref([
-	{
-		id: 1,
-		nome: 'teste1',
-		endereco: 'teste11'
-	},
-	{
-		id: 2,
-		nome: 'teste2',
-		endereco: 'teste22'
-	},
-	{
-		id: 3,
-		nome: 'teste3',
-		endereco: 'teste33'
-	},
-	{
-		id: 3,
-		nome: 'teste3',
-		endereco: 'teste33'
-	},
-])
+async function getStores() {
+	const response = await axios({
+		method: 'get',
+		url: 'http://localhost:3000/mercados',
+	}).catch(error => console.log(error))
 
+	if (response) {
+		stores.value = response.data
+	}
+}
+
+const showEditModal = ref(false)
 const showModal = ref(false)
 
 function openModal(value) {
+	if (value === 'edit') {
+		showEditModal.value = true
+	}
 	showModal.value = value
 }
 
 </script>
 
 <template>
+	<EditStoreModal v-if="showEditModal" @modal="openModal"/>
 	<CreateStoreModal v-if="showModal" @modal="openModal" />
 
 	<HeaderComponent title="LOJAS" btnText="Adicionar lojas" @modal="openModal" />
 
 	<div class="stores-container">
-		<Store v-for="s in stores" :key="s.id" :store="s" @click="router.push(`loja/${s.id}`)" />
+		<Store v-for="s in stores" :key="s.ID" :store="s" @click="router.push(`loja/${s.ID}`)" @openModal="openModal"/>
 	</div>
 </template>
 

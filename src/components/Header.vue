@@ -18,7 +18,7 @@ const emit = defineEmits(['modal'])
 			<div class="spacer">
 				<h1>{{ props.title }}</h1>
 
-				<button v-if="props.btnText != ''" @click="emit('modal', true)">{{ props.btnText }}
+				<button v-if="props.btnText != ''" @click="emit('modal', 'create')">{{ props.btnText }}
 					<Icon icon="material-symbols:add-2" width="30px" />
 				</button>
 			</div>

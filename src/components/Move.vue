@@ -7,12 +7,12 @@ const props = defineProps(['move'])
 <template>
   <div class="move">
     <div>
-      <h1>{{ props.move.tipo }}</h1>
+      <h1>{{ props.move.TIPO }}</h1>
 
-      <p> <span>{{ props.move.quantidade }}</span> unidades</p>
+      <p> <span>{{ props.move.QUANTIDADE }}</span> unidades</p>
     </div>
 
-    <p>{{ props.move.data }}</p>
+    <p>{{ props.move.DATA }}</p>
   </div>
 </template>
 

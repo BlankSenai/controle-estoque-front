@@ -1,17 +1,21 @@
 <script setup>
-import { Icon } from '@iconify/vue';
+import { Icon } from '@iconify/vue'
+import axios from 'axios'
 import { defineProps } from 'vue'
 
-const props = defineProps(['product'])
+const props = defineProps(['product', 'storeId'])
 
-function deleteProduct() {
-
+async function deleteProduct() {
+	await axios({
+		method: 'delete',
+		url: `http://localhost:3000/mercados/${props.storeId}/produtos/${props.product.ID}`
+	})
 }
 </script>
 
 <template>
 	<div class="product">
-		<h1>{{ props.product.nome }}</h1>
+		<h1>{{ props.product.NOME }}</h1>
 
 		<Icon icon="material-symbols:delete" width="30px" color="#333" class="delete-btn" @click.stop="deleteProduct" />
 	</div>

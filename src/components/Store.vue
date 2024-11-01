@@ -1,23 +1,28 @@
 <script setup>
 import { Icon } from '@iconify/vue';
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
+import axios from 'axios'
 
+const emit = defineEmits(['openModal'])
 const props = defineProps(['store'])
 
-function deleteStore() {
-
+async function deleteStore() {
+	await axios({
+		method: 'delete',
+		url: `http://localhost:3000/mercados/${props.store.ID}`,
+	}).catch(error => console.log(error))
 }
 
 function editStore() {
-
+	emit('openModal', 'edit')
 }
 </script>
 
 <template>
 	<div class="store">
 		<div class="text">
-			<h1>{{ store.nome }}</h1>
-			<h2>{{ store.endereco }}</h2>
+			<h1>{{ store.NOME }}</h1>
+			<h2>{{ store.ENDERECO }}</h2>
 		</div>
 
 		<div class="btn-container">

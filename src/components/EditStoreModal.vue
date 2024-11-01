@@ -1,48 +1,40 @@
 <script setup>
-import { defineEmits, defineProps, ref } from 'vue'
+import { defineEmits, ref } from 'vue'
 import axios from 'axios'
 
-const props = defineProps(['storeId'])
-const emit = defineEmits(['modal'])
+const emit = defineEmits(['modal', 'submitData'])
 
 const name = ref('')
-const description = ref('')
-const price = ref(0)
-const quantity = ref(0)
+const address = ref('')
 const inputColor = ref('solid 1px black')
 
 async function validateInputs() {
-	if (name.value === '' || description.value === ''
-		|| price.value == 0 || quantity.value === ''
-	) {
+	if (name.value === '' || address.value === '') {
 		inputColor.value = 'solid 1px red'
 	} else {
 		inputColor.value = 'solid 1px black'
 
-		const product = {
+		const store = {
 			nome: name.value,
-			descricao: description.value,
-			preco: price.value,
-			quantidade: quantity.value
+			endereco: address.value
 		}
 
 		await axios({
-			method: 'post',
-			url: `http://localhost:3000/mercados/${props.storeId}/produtos`,
-			data: product
-		}).catch(error => console.log(error))
+			url: 'http://localhost:3000/mercados',
+			method: 'put',
+			data: store
+		})
 
 		emit('modal', false)
 	}
 }
-
 </script>
 
 <template>
 	<div @click="emit('modal', false)" class="overlay"></div>
 
 	<div class="modal">
-		<h1>Novo Produto</h1>
+		<h1>Editar Loja</h1>
 
 		<div class="line"></div>
 
@@ -50,17 +42,11 @@ async function validateInputs() {
 			<label>Nome</label>
 			<input v-model="name" :style="{ border: inputColor }" type="text">
 
-			<label>Descrição</label>
-			<input v-model="description" :style="{ border: inputColor }" type="text">
-
-			<label>Preço</label>
-			<input v-model="price" :style="{ border: inputColor }" type="number">
-
-			<label>Quantidade</label>
-			<input v-model="quantity" :style="{ border: inputColor }" type="number">
+			<label>Endereço</label>
+			<input v-model="address" :style="{ border: inputColor }" type="text">
 		</div>
 
-		<button @click="validateInputs" class="btn">Criar Produto</button>
+		<button @click="validateInputs" class="btn">Criar Loja</button>
 	</div>
 </template>
 
@@ -74,8 +60,8 @@ async function validateInputs() {
 }
 
 .modal {
-	width: 55%;
-	height: 85%;
+	width: 40%;
+	height: 70%;
 	padding: 40px;
 	background-color: #eee;
 	position: fixed;

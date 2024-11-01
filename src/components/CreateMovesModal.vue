@@ -2,28 +2,31 @@
 import { defineEmits, ref } from 'vue'
 import axios from 'axios'
 
+const props = defineProps(['storeId', 'productId'])
 const emit = defineEmits(['modal'])
 
 const type = ref('')
 const quantity = ref('')
 const inputColor = ref('solid 1px black')
 
-function validateInputs() {
+async function validateInputs() {
 	if (type.value === '' || quantity.value == '') {
 		inputColor.value = 'solid 1px red'
 	} else {
 		inputColor.value = 'solid 1px black'
 
 		const movement = {
-			tipo: type.value,
-			quantidade: quantity.value,
-			data: new Date().toLocaleDateString()
+			tipo: type.value.toUpperCase(),
+			quantidade: Number(quantity.value),
+			data_movimentacao: new Date().toLocaleDateString()
 		}
 
-		axios('http://localhost:3000/movimentos', {
-			method: 'POST',
+		await axios({
+			url: `http://localhost:3000/mercados/${props.storeId}/produtos/${props.productId}/movimentacoes`,
+			method: 'post',
 			data: movement
-		})
+		}).catch(error => console.log(error))
+
 
 		emit('modal', false)
 	}

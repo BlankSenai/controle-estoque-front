@@ -1,55 +1,31 @@
 <script setup>
 import HeaderComponent from '../components/Header.vue'
 import CreateProductModal from '../components/CreateProductModal.vue'
-import { ref } from 'vue'
+import { onMounted, onUpdated, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 import Product from '@/components/Product.vue'
 
+onMounted(getProducts)
+onUpdated(getProducts)
+
 const route = useRoute()
 const router = useRouter()
 
-const storeId = route.params.id
-
-const produtos = [
-  {
-    id: 1,
-    nome: "Arroz 5kg",
-    descricao: "Arroz branco tipo 1",
-    preco: 20.50,
-    quantidade: 100
-  },
-  {
-    id: 2,
-    nome: "Arroz 5kg",
-    descricao: "Arroz branco tipo 1",
-    preco: 20.50,
-    quantidade: 100
-  },
-  {
-    id: 3,
-    nome: "Arroz 5kg",
-    descricao: "Arroz branco tipo 1",
-    preco: 20.50,
-    quantidade: 100
-  },
-  {
-    id: 4,
-    nome: "Arroz 5kg",
-    descricao: "Arroz branco tipo 1",
-    preco: 20.50,
-    quantidade: 100
-  },
-  {
-    id: 5,
-    nome: "Arroz 5kg",
-    descricao: "Arroz branco tipo 1",
-    preco: 20.50,
-    quantidade: 100
-  },
-]
+const products = ref([])
 
 const showModal = ref(false)
+
+async function getProducts() {
+  const response = await axios({
+    method: 'get',
+    url: `http://localhost:3000/mercados/${route.params.id}/produtos`
+  }).catch(error => console.log(error))
+
+  if (response) {
+    products.value = response.data.resultado
+  }
+}
 
 function openModal(value) {
   showModal.value = value
@@ -57,12 +33,12 @@ function openModal(value) {
 </script>
 
 <template>
-  <CreateProductModal v-if="showModal" @modal="openModal" />
+  <CreateProductModal v-if="showModal" @modal="openModal" :storeId="route.params.id"/>
 
   <HeaderComponent title="SJIBSDVU" btnText="Novo Produto" @modal="openModal" />
 
   <div class="products-container">
-    <Product @click="router.push(`/produto/${p.id}`)" v-for="p in produtos" :key="p.id" :product="p" />
+    <Product @click="router.push(`/${route.params.id}/produto/${p.ID}`)" v-for="p in products" :key="p.ID" :product="p" :storeId="route.params.id"/>
   </div>
 </template>
 
