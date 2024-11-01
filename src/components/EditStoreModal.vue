@@ -1,8 +1,9 @@
 <script setup>
-import { defineEmits, ref } from 'vue'
+import { defineEmits, defineProps, ref } from 'vue'
 import axios from 'axios'
 
-const emit = defineEmits(['modal', 'submitData'])
+const props = defineProps(['storeId'])
+const emit = defineEmits(['closeModal', 'submitData'])
 
 const name = ref('')
 const address = ref('')
@@ -20,7 +21,7 @@ async function validateInputs() {
 		}
 
 		await axios({
-			url: 'http://localhost:3000/mercados',
+			url: `http://localhost:3000/mercados/${props.storeId}`,
 			method: 'put',
 			data: store
 		})
@@ -31,7 +32,7 @@ async function validateInputs() {
 </script>
 
 <template>
-	<div @click="emit('modal', false)" class="overlay"></div>
+	<div @click="emit('closeModal', 'edit')" class="overlay"></div>
 
 	<div class="modal">
 		<h1>Editar Loja</h1>

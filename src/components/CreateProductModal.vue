@@ -3,7 +3,7 @@ import { defineEmits, defineProps, ref } from 'vue'
 import axios from 'axios'
 
 const props = defineProps(['storeId'])
-const emit = defineEmits(['modal'])
+const emit = defineEmits(['closeModal'])
 
 const name = ref('')
 const description = ref('')
@@ -32,14 +32,14 @@ async function validateInputs() {
 			data: product
 		}).catch(error => console.log(error))
 
-		emit('modal', false)
+		emit('closeModal', 'create')
 	}
 }
 
 </script>
 
 <template>
-	<div @click="emit('modal', false)" class="overlay"></div>
+	<div @click="emit('closeModal', 'create')" class="overlay"></div>
 
 	<div class="modal">
 		<h1>Novo Produto</h1>

@@ -11,6 +11,8 @@ const router = useRouter()
 
 const stores = ref([])
 
+const storeId = ref()
+
 onMounted(getStores)
 onUpdated(getStores)
 
@@ -26,22 +28,31 @@ async function getStores() {
 }
 
 const showEditModal = ref(false)
-const showModal = ref(false)
+const showCreateModal = ref(false)
 
-function openModal(value) {
+function closeModal(value) {
+	if (value === 'edit') {
+		showEditModal.value = false
+	} else if (value ==='create')
+		showCreateModal.value = false
+}
+
+function openModal(value, id) {
+	storeId.value = id
+
 	if (value === 'edit') {
 		showEditModal.value = true
-	}
-	showModal.value = value
+	} else if (value ==='create')
+		showCreateModal.value = true
 }
 
 </script>
 
 <template>
-	<EditStoreModal v-if="showEditModal" @modal="openModal"/>
-	<CreateStoreModal v-if="showModal" @modal="openModal" />
+	<EditStoreModal v-if="showEditModal" @closeModal="closeModal" :storeId="storeId"/>
+	<CreateStoreModal v-if="showCreateModal" @closeModal="closeModal" />
 
-	<HeaderComponent title="LOJAS" btnText="Adicionar lojas" @modal="openModal" />
+	<HeaderComponent title="LOJAS" btnText="Adicionar lojas" @openModal="openModal" />
 
 	<div class="stores-container">
 		<Store v-for="s in stores" :key="s.ID" :store="s" @click="router.push(`loja/${s.ID}`)" @openModal="openModal"/>

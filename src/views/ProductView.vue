@@ -4,7 +4,8 @@ import HeaderComponent from '../components/Header.vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue'
+import EditProductModal from '@/components/EditProductModal.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -24,12 +25,22 @@ async function getProduct() {
   }
 }
 
-function editProduct() {
+const showEditModal = ref(false)
+
+function closeModal() {
+  showEditModal.value = false
 
 }
+
+function  openModal() {
+  showEditModal.value = true
+}
+
 </script>
 
 <template>
+  <EditProductModal v-if="showEditModal" @closeModal="closeModal" :productId="route.params.id"/>
+
   <HeaderComponent :title="product.NOME" btnText="" />
 
   <div class="product-info-container">
@@ -49,7 +60,7 @@ function editProduct() {
           <p class="quantity">{{ product.QUANTIDADE }}<span> em estoque</span></p>
         </div>
 
-        <Icon icon="material-symbols:edit" width="30px" color="#333" class="edit-btn" @click="editProduct" />
+        <Icon icon="material-symbols:edit" width="30px" color="#333" class="edit-btn" @click="openModal" />
       </div>
     </div>
 

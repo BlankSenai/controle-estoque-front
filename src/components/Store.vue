@@ -14,7 +14,7 @@ async function deleteStore() {
 }
 
 function editStore() {
-	emit('openModal', 'edit')
+	emit('openModal', 'edit', props.store.ID)
 }
 </script>
 
